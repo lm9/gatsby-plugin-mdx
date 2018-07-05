@@ -1,17 +1,12 @@
-// const webpack = require(`webpack`)
-
-// Add Glamor support
+const path = require('path')
 exports.modifyWebpackConfig = ({ config, stage }) => {
-  const mdFiles = /\.mdx?$/;
-  config.loader(`mdx`, {
-    test: mdFiles,
-    loaders: ['babel-loader?' + 'babelrc=false,' + 'presets[]=env,' + 'presets[]=react', 'mdx-loader']
-  });
-};
-
-// Add Glamor support
-// exports.modifyBabelrc = ({ babelrc }) => {
-//   return Object.assign(babelrc, {
-//     plugins: babelrc.plugins.concat(['@mdx-js/loader']),
-//   })
-// }
+	const mdFiles = /\.mdx?$/;
+	config.loader(`mdx`, {
+		test: mdFiles,
+		loaders: [
+			'babel-loader?' + 'babelrc=false,' + 'presets[]=env,' + 'presets[]=react',
+			'mdx-loader',
+			path.resolve('markdown-loader.js')
+		]
+	})
+}
